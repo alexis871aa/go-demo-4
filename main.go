@@ -2,22 +2,38 @@ package main
 
 import "fmt"
 
-func main() {
-	a := [4]int{1, 2, 3, 4}
-	reverse(&a) // меняет порядок элементов на обратный
-	fmt.Println(a)
+type account struct {
+	login    string
+	password string
+	url      string
 }
 
-func reverse(arr *[4]int) {
-	// другой вариант (якобы правильный)
-	for index, value := range *arr {
-		(*arr)[len(arr)-1-index] = value
+func main() {
+	str := []rune("Привет!)")
+	for _, ch := range string(str) {
+		fmt.Println(ch, string(ch))
+	}
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+
+	myAccount := account{
+		password: password,
+		url:      url,
+		login:    login,
 	}
 
-	// мой вариант
-	//for i := 0; i < len(*arr)/2; i++ {
-	//	tmp := (*arr)[i]
-	//	(*arr)[i] = (*arr)[len(*arr)-i-1]
-	//	(*arr)[len(*arr)-i-1] = tmp
-	//}
+	outputPassword(&myAccount)
+}
+
+func promptData(prompt string) string {
+	fmt.Println(prompt + ": ")
+	var res string
+	fmt.Scan(&res)
+	return res
+}
+
+func outputPassword(acc *account) {
+	fmt.Println(acc)
+	fmt.Println(acc.login, acc.password, acc.url)
 }
