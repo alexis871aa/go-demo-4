@@ -2,14 +2,15 @@ package main
 
 import (
 	"demo/password/account"
-	"demo/password/files"
+	"demo/password/cloud"
 	"fmt"
 	"github.com/fatih/color"
 )
 
 func main() {
 	fmt.Println("__Менеджер паролей__")
-	vault := account.NewVault(files.NewJsonDb("data.json"))
+	// vault := account.NewVault(files.NewJsonDb("data.json"))
+	vault := account.NewVault(cloud.NewCloudDb("https:a1.ru"))
 Menu:
 	for {
 		variant := getMenu()
