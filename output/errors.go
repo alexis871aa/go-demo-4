@@ -1,6 +1,9 @@
 package output
 
-import "github.com/fatih/color"
+import (
+	"fmt"
+	"github.com/fatih/color"
+)
 
 func PrintError(value any) { // interface{}
 	intValue, ok := value.(int)
@@ -31,3 +34,32 @@ func PrintError(value any) { // interface{}
 	//	color.Red("Неизвестный тип ошибки")
 	//}
 }
+
+// мы не можем добавить в union types интерфейсы
+func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
+	//intValue, ok := value.(int) // так не работает
+
+	// type switch не работает с дженериком
+	//switch d := a.(type) {
+	//}
+
+	// мы не можем вернуть просто 1, так в union типе есть string, но мы можем вернуть сумму T
+	return a + b
+}
+
+func example[T int | string](a, b T) T {
+	// лайфхак, как обойти ограничение дженериков
+	switch d := any(a).(type) {
+	case string:
+		fmt.Println(d)
+	}
+	return a + b
+}
+
+//type List[T any] struct {
+//	elements []T
+//}
+//
+//func (l *List[T]) addElement() {
+//
+//}
