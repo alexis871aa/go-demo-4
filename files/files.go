@@ -2,7 +2,7 @@ package files
 
 import (
 	"demo/password/output"
-	"fmt"
+	"github.com/fatih/color"
 	"os"
 )
 
@@ -36,5 +36,5 @@ func (db *JsonDb) Write(content []byte) {
 		output.PrintError(err)
 		return
 	}
-	fmt.Println("Запись успешна")
+	color.Green("Запись успешна")
 }
