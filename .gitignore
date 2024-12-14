@@ -1,3 +1,4 @@
 /password.exe
+/*.vault
 .idea
-/data.json
+.env*
